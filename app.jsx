@@ -39,7 +39,10 @@ const INITIAL = [
     ink: '#3F7A5B',
     hue: 150,
     items: [
-      { id: 'h1', title: 'role / content ...', desc: 'user: 帮我部署到 Vercel / assistant: 已完成部署并返回 URL' },
+      { id: 'h1', title: 'user / content', desc: '帮我把这个项目部署到 Vercel' },
+      { id: 'h2', title: 'assistant / content', desc: '已完成部署，生产地址是 https://prompt-architecture.vercel.app' },
+      { id: 'h3', title: 'user / content', desc: '默认结构里 tools 要放在 session 前面' },
+      { id: 'h4', title: 'assistant / content', desc: '已调整模块顺序，并重新发布到生产环境' },
     ],
   },
   {
@@ -634,7 +637,7 @@ function Tray({ stash, drag, setDrag, dragHandled }) {
 
 function App() {
   const [sections, setSections] = useState(() => {
-    const saved = localStorage.getItem('promt-sections-v4');
+    const saved = localStorage.getItem('promt-sections-v5');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) {}
     }
@@ -656,7 +659,7 @@ function App() {
   });
 
   useEffect(() => {
-    localStorage.setItem('promt-sections-v4', JSON.stringify(sections));
+    localStorage.setItem('promt-sections-v5', JSON.stringify(sections));
   }, [sections]);
 
   useEffect(() => {
