@@ -13,20 +13,8 @@ const INITIAL = [
     items: [
       { id: 's1', title: 'personality', desc: 'static · 全用户共享，最佳缓存前缀' },
       { id: 's2', title: 'global memory', desc: 'static-ish · 累积更新但稳定' },
-      { id: 's3', title: 'context', desc: '场景描述 / 模型定义 / 时间' },
-    ],
-  },
-  {
-    id: 'sec-history',
-    kind: 'history',
-    title: 'session history',
-    subtitle: '会话消息序列',
-    color: '#D6F5E3',
-    deep: '#9EDDBC',
-    ink: '#3F7A5B',
-    hue: 150,
-    items: [
-      { id: 'h1', title: 'role / content ...', desc: '每段带 turn_hash' },
+      { id: 's3', title: 'context', desc: '场景描述 / 模型定义' },
+      { id: 's4', title: 'current time', desc: '请求时间 / 日期 / 时区' },
     ],
   },
   {
@@ -43,6 +31,19 @@ const INITIAL = [
     ],
   },
   {
+    id: 'sec-history',
+    kind: 'history',
+    title: 'session history',
+    subtitle: '会话消息序列',
+    color: '#D6F5E3',
+    deep: '#9EDDBC',
+    ink: '#3F7A5B',
+    hue: 150,
+    items: [
+      { id: 'h1', title: 'role / content ...', desc: '每段带 turn_hash' },
+    ],
+  },
+  {
     id: 'sec-inject',
     kind: 'inject',
     title: '末尾临时注入',
@@ -52,9 +53,8 @@ const INITIAL = [
     ink: '#A35820',
     hue: 60,
     items: [
-      { id: 'i1', title: 'dynamic tools', desc: '动态工具描述，破坏前缀缓存不可入 API tools' },
       { id: 'i2', title: 'current state', desc: 'background task / todo / 当前 role' },
-      { id: 'i3', title: 'session memory', desc: '可选：临时记忆，压缩历史时落入' },
+      { id: 'i3', title: 'session memory', desc: '会话中加入' },
     ],
   },
 ];
@@ -635,7 +635,7 @@ function Tray({ stash, drag, setDrag, dragHandled }) {
 
 function App() {
   const [sections, setSections] = useState(() => {
-    const saved = localStorage.getItem('promt-sections-v2');
+    const saved = localStorage.getItem('promt-sections-v3');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) {}
     }
@@ -657,7 +657,7 @@ function App() {
   });
 
   useEffect(() => {
-    localStorage.setItem('promt-sections-v2', JSON.stringify(sections));
+    localStorage.setItem('promt-sections-v3', JSON.stringify(sections));
   }, [sections]);
 
   useEffect(() => {
