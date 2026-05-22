@@ -14,7 +14,6 @@ const INITIAL = [
       { id: 's1', title: 'personality', desc: 'static · 全用户共享，最佳缓存前缀' },
       { id: 's2', title: 'global memory', desc: 'static-ish · 累积更新但稳定' },
       { id: 's3', title: 'context', desc: '场景描述 / 模型定义' },
-      { id: 's4', title: 'current time', desc: '请求时间 / 日期 / 时区' },
     ],
   },
   {
@@ -40,20 +39,20 @@ const INITIAL = [
     ink: '#3F7A5B',
     hue: 150,
     items: [
-      { id: 'h1', title: 'role / content ...', desc: '每段带 turn_hash' },
+      { id: 'h1', title: 'role / content ...', desc: 'user: 帮我部署到 Vercel / assistant: 已完成部署并返回 URL' },
     ],
   },
   {
     id: 'sec-inject',
     kind: 'inject',
-    title: '末尾临时注入',
+    title: '动态注入',
     subtitle: '塞进最后一条 user message',
     color: '#FFE2C6',
     deep: '#FFC089',
     ink: '#A35820',
     hue: 60,
     items: [
-      { id: 'i2', title: 'current state', desc: 'background task / todo / 当前 role' },
+      { id: 'i2', title: 'current state', desc: 'background task / todo / 当前 mode / subagent' },
       { id: 'i3', title: 'session memory', desc: '会话中加入' },
     ],
   },
@@ -635,7 +634,7 @@ function Tray({ stash, drag, setDrag, dragHandled }) {
 
 function App() {
   const [sections, setSections] = useState(() => {
-    const saved = localStorage.getItem('promt-sections-v3');
+    const saved = localStorage.getItem('promt-sections-v4');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) {}
     }
@@ -657,7 +656,7 @@ function App() {
   });
 
   useEffect(() => {
-    localStorage.setItem('promt-sections-v3', JSON.stringify(sections));
+    localStorage.setItem('promt-sections-v4', JSON.stringify(sections));
   }, [sections]);
 
   useEffect(() => {
